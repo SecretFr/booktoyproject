@@ -8,27 +8,11 @@ spring:
   rabbitmq:
     host: 127.0.0.1
     port: 5672
-    username: guest
-    password: guest
+    username: tmax2021
+    password: 1234
   cloud:
     gateway:
       routes:
-        - id: first-service
-          uri: lb://FIRST-SERVICE
-              #http://localhost:8081/
-          predicates:
-            - Path=/first-service/**
-          filters:
-            - AddRequestHeader=first-request, jaewon-yang
-            - AddResponseHeader=first-response, Hi-jaewon
-        - id: second-service
-          uri: lb://SECOND-SERVICE
-              #http://localhost:8082/
-          predicates:
-            - Path=/second-service/**
-          filters:
-            - AddRequestHeader=second-request, kenneth
-            - AddResponseHeader=second-response, Hello-kenneth
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
@@ -44,6 +28,14 @@ spring:
           predicates:
             - Path=/user-service/users
             - Method=POST
+          filters:
+            #- RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/users/**
+            - Method=DELETE, POST, PUT
           filters:
             #- RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
@@ -68,6 +60,7 @@ spring:
           uri: lb://CATALOG-SERVICE
           predicates:
             - Path=/catalog-service/**
+            - Method=GET, POST, DELETE, PUT
           filters:
             - RewritePath=/catalog-service/(?<segment>.*), /$\{segment}
         - id: order-service

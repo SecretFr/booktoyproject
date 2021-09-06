@@ -23,7 +23,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -64,7 +68,7 @@ public class UserServiceImpl implements UserService{
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         UserEntity userEntity = mapper.map(userDto, UserEntity.class);
-        userEntity.setEncryptedPwd(passwordEncoder.encode(userDto.getPwd()));
+        userEntity.setPassword(passwordEncoder.encode(userDto.getPassword()));
 //        userEntity.setEncryptedPwd("encrypted_password");
         userRepository.save(userEntity);
 
@@ -119,6 +123,50 @@ public class UserServiceImpl implements UserService{
         return userDto;
     }
 
+    //유저 조회 by name
+    @Override
+    public UserDto getUserByName(String name) {
+        UserEntity userEntity = userRepository.findByName(name);
+        if(userEntity == null){
+            throw new UsernameNotFoundException(name);
+        }
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        UserDto userDto = mapper.map(userEntity, UserDto.class);
+        return userDto;
+    }
+
+    //회원 정보 수정 by userId
+    @Override
+    public UserDto updateUser(String userId, UserDto userDetail, Long id) {
+        Date now = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        UserEntity userEntity = userRepository.findByUserId(userId);
+        if(userEntity == null){
+            throw new UsernameNotFoundException(userId);
+        }
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        UserDto userDto = mapper.map(userEntity, UserDto.class);
+
+        userDto.setId(id);
+        userDto.setName(userDetail.getName());
+        userDto.setWallet(userDetail.getWallet());
+        userDto.setZipcode(userDetail.getZipcode());
+        userDto.setAddress1(userDetail.getAddress1());
+        userDto.setAddress2(userDetail.getAddress2());
+        try {
+            userDto.setModifiedAt(dateFormat.parse(dateFormat.format(now)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        userEntity = mapper.map(userDto, UserEntity.class);
+        userRepository.save(userEntity);
+
+        return userDto;
+    }
+
     @Override
     public UserDto getUserDetailByEmail(String email) {
         UserEntity userEntity = userRepository.findByEmail(email);
@@ -137,6 +185,18 @@ public class UserServiceImpl implements UserService{
         return userRepository.findAll();
     }
 
+    //사용자 삭제
+    @Override
+    public UserDto deleteUser(int id, UserDto userDto) {
+        UserEntity userEntity = userRepository.findByEmail(userDto.getEmail());
+        if(userEntity == null){
+            throw new UsernameNotFoundException(userDto.getEmail());
+        }
+        userRepository.delete(userEntity);
+
+        return userDto;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByEmail(email);
@@ -146,7 +206,7 @@ public class UserServiceImpl implements UserService{
         }
 
         //User is an UserDetails
-        User user = new User(userEntity.getEmail(), userEntity.getEncryptedPwd(),
+        User user = new User(userEntity.getEmail(), userEntity.getPassword(),
                 true, true, true, true,
                 new ArrayList<>());
 

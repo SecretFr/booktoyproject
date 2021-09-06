@@ -30,13 +30,14 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+        http.cors().disable();
 //        http.authorizeRequests().antMatchers("/users/**").permitAll();
         http.authorizeRequests().antMatchers("/health_check/**").permitAll();
         http.authorizeRequests().antMatchers("/actuator/**").permitAll();
         http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
         http.authorizeRequests().antMatchers("/**")
-//                        .access("hasIpAddress('10.10.20.48') or hasIpAddress('192.168.201.106') or hasIpAddress('172.30.1.50') or hasIpAddress('192.168.219.105')")
-                        .hasIpAddress(env.getProperty("gateway.ip")) // IP Address
+                        .access("hasIpAddress('10.10.20.48') or hasIpAddress('192.168.201.106') or hasIpAddress('172.30.1.50') or hasIpAddress('192.168.219.105')")
+//                        .hasIpAddress(env.getProperty("gateway.ip")) // IP Address
                         .and()
                         .addFilter(getApplicationFilter());
         http.headers().frameOptions().disable();

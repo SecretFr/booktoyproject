@@ -3,9 +3,7 @@ package com.example.userservice.controller;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.entity.UserEntity;
 import com.example.userservice.service.UserService;
-import com.example.userservice.vo.Greeting;
-import com.example.userservice.vo.RequestUser;
-import com.example.userservice.vo.ResponseUser;
+import com.example.userservice.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -99,6 +97,14 @@ public class UserServiceController {
         return result;
     }
 
+    //이름으로 사용자 조회
+//    @GetMapping("/users/{name}")
+//    public ResponseEntity<ResponseUser> getUserByName(@PathVariable("name") String name){
+//        UserDto userDto = userService.getUserByName(name);
+//        ResponseUser returnValue = new ModelMapper().map(userDto, ResponseUser.class);
+//        return ResponseEntity.status(HttpStatus.OK).body(returnValue);
+//    }
+
     //사용자 상세보기 (with 주문 목록)
     @GetMapping(value = "/users/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ResponseUser> getUser(@PathVariable("userId") String userId){
@@ -106,5 +112,33 @@ public class UserServiceController {
         ResponseUser returnValue = new ModelMapper().map(userDto, ResponseUser.class);
 
         return ResponseEntity.status(HttpStatus.OK).body(returnValue);
+    }
+
+    //사용자 세부사항 수정
+    @PutMapping(value="/users/{userId}/{id}")
+    public ResponseEntity<ResponseUpdateUser> updateUser(@PathVariable("userId") String userId,
+                                                   @RequestBody RequestUpdateUser userDetail,
+                                                   @PathVariable("id") Long id){
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        UserDto userDto = mapper.map(userDetail, UserDto.class);
+
+        userDto = userService.updateUser(userId, userDto, id);
+        ResponseUpdateUser responseUser = new ModelMapper().map(userDto, ResponseUpdateUser.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseUser);
+    }
+
+    //사용자 삭제
+    @DeleteMapping(value = "/users/{id}")
+    public ResponseEntity<ResponseDeleteUser> deleteUser(@PathVariable("id") int id,
+                                                   @RequestBody RequestDeleteUser userDelete){
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        UserDto userDto = mapper.map(userDelete, UserDto.class);
+
+        userDto = userService.deleteUser(id, userDto);
+        ResponseDeleteUser responseUser = new ModelMapper().map(userDto, ResponseDeleteUser.class);
+        return ResponseEntity.status(HttpStatus.OK).body(responseUser);
     }
 }

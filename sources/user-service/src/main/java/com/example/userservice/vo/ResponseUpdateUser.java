@@ -2,13 +2,14 @@ package com.example.userservice.vo;
 
 import lombok.Data;
 
+import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.List;
 
 @Data
-public class ResponseUser {
+public class ResponseUpdateUser {
+
+    private Long id;
     private String email;
-    private String password;
     private String name;
     private String userId;
 
@@ -19,6 +20,4 @@ public class ResponseUser {
     private int wallet;
 
     private Date modifiedAt;
-
-    private List<ResponseOrder> orders;
 }

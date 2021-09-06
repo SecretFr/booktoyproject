@@ -8,25 +8,25 @@ spring:
   rabbitmq:
     host: 127.0.0.1
     port: 5672
-    username: guest
-    password: guest
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: true
-      path: /h2-console
+    username: tmax2021
+    password: 1234
+#  h2:
+#    console:
+#      enabled: true
+#      settings:
+#        web-allow-others: true
+#      path: /h2-console
   zipkin:
     base-url: http://localhost:9411
     enabled: true
   sleuth:
     sampler:
       probability: 1.0
-#  datasource:
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:mem:testdb
-#    username: sa
-#    password:
+  datasource:
+    url: jdbc:mariadb://localhost:23306/bookdb
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: test1234
 
 eureka:
   client:

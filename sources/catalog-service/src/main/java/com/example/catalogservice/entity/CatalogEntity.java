@@ -4,30 +4,44 @@ import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Entity
-@Table(name="catalog")
+@Table(name="catalogs")
 public class CatalogEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(nullable = false, length = 120, unique = true)
-    private String productId;
+    private long productId;
 
     @Column(nullable = false)
     private String productName;
 
     @Column(nullable = false)
-    private Integer stock;
+    private Integer qty;
 
     @Column(nullable = false)
     private Integer unitPrice;
 
+    @Column
+    private String detail;
+
+    @Column
+    private String filename;
+
+    @Column
+    private Integer cateNo;
+
     @Column(nullable = false, updatable = false, insertable = false)
     @ColumnDefault(value = "CURRENT_TIMESTAMP")
-    private Date createAt;
+    private Date createdAt;
+
+    @Column(nullable = true)
+    @ColumnDefault(value="CURRENT_TIMESTAMP")
+    private Date modifiedAt;
+
+    @Column(nullable = true)
+    private Date deletedAt;
 }

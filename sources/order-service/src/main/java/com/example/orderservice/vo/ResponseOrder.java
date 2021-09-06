@@ -8,7 +8,9 @@ import java.util.Date;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseOrder {
-    private String productId;
+    private Long productId;
+    private String email;
+    private String name;
     private Integer qty;
     private Integer unitPrice;
     private Integer totalPrice;
@@ -16,5 +18,4 @@ public class ResponseOrder {
     private Date modifiedAt;
 
     private String orderId;
-    private String instanceId;
 }

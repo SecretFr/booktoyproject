@@ -1,9 +1,11 @@
 package com.example.orderservice.service;
 
 
+import com.example.orderservice.client.UserServiceClient;
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.jpa.OrderEntity;
 import com.example.orderservice.jpa.OrderRepository;
+import com.example.orderservice.vo.ResponseUser;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +32,13 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public OrderDto createOrder(OrderDto orderDetail) {
+    public OrderDto createOrder(OrderDto orderDetail, String userId) {
         orderDetail.setOrderId(UUID.randomUUID().toString());
+
         orderDetail.setTotalPrice(orderDetail.getQty() * orderDetail.getUnitPrice());
         System.out.println(env.getProperty("eureka.instance.instance-id"));
         System.out.println(env.getProperty("server.port"));
-        orderDetail.setInstanceId(env.getProperty("eureka.instance.instance-id"));
+//        orderDetail.setInstanceId(env.getProperty("eureka.instance.instance-id"));
 
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);

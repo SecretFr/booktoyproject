@@ -5,6 +5,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -16,7 +17,7 @@ public class OrderEntity implements Serializable {
     private Long orderNo;
 
     @Column(nullable = true)
-    private Integer productId;
+    private Long productId;
 
     @Column(nullable = false)
     private String productName;
@@ -41,15 +42,15 @@ public class OrderEntity implements Serializable {
 
     @Column(nullable = false, insertable = false, updatable = false)
     @ColumnDefault(value="CURRENT_TIMESTAMP")
-    private Date orderDate;
+    private LocalDate orderDate;
 
     @Column
     @ColumnDefault(value="CURRENT_TIMESTAMP")
-    private Date modifiedAt;
+    private LocalDate modifiedAt;
 
     @Column
     @ColumnDefault(value="CURRENT_TIMESTAMP")
-    private Date cancelDate;
+    private LocalDate cancelDate;
 
     @Column(nullable = false)
     private String zipcode;

@@ -19,6 +19,7 @@ public class OrderDto implements Serializable {
     private Date modifiedAt;
 
     private Long id;
+    private Long orderNo;
 
     private String email;
     private String name;

@@ -6,6 +6,7 @@ import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.jpa.OrderEntity;
 import com.example.orderservice.jpa.OrderRepository;
 import com.example.orderservice.vo.ResponseUser;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class OrderServiceImpl implements OrderService{
     OrderRepository repository;
     Environment env;
@@ -65,7 +67,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public OrderDto updateOrder(OrderDto orderDetail, Long id) {
+    public OrderDto updateOrder(OrderDto orderDetail, Long orderNo) {
         Date now = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
@@ -74,7 +76,8 @@ public class OrderServiceImpl implements OrderService{
         OrderEntity orderEntity = repository.findByOrderId(orderDetail.getOrderId());
 
         OrderDto orderDto = modelMapper.map(orderEntity, OrderDto.class);
-        orderDto.setId(id);
+//        orderDto.setId(orderEntity.getId());
+        orderDto.setOrderNo(orderNo);
         orderDto.setQty(orderDetail.getQty());
         orderDto.setUnitPrice(orderDetail.getUnitPrice());
         orderDto.setTotalPrice(orderDetail.getQty() * orderDetail.getUnitPrice());
@@ -89,5 +92,22 @@ public class OrderServiceImpl implements OrderService{
         repository.save(orderEntity);
 
         return orderDto;
+    }
+
+    //전체 사용자 주문 목록
+    @Override
+    public Iterable<OrderEntity> getAllOrders() {
+        return repository.findAll();
+    }
+
+    @Override
+    public String deleteOrder(String orderId) {
+        OrderEntity orderEntity = repository.findByOrderId(orderId);
+        if(orderEntity == null){
+            log.info("Not Found orderId"+orderId);
+        }
+        repository.delete(orderEntity);
+        String result = "Delete OK!";
+        return result;
     }
 }

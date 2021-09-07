@@ -76,6 +76,7 @@ public class CatalogController {
         return ResponseEntity.status(HttpStatus.OK).body(responseEnrollCatalog);
     }
 
+    //개별 상품 조회
     @GetMapping("/catalogs/catalog/{id}")
     public ResponseEntity<ResponseCatalog> getCatalog(@PathVariable Long id) {
         log.info("Before retrieve catalogs data");
@@ -118,7 +119,7 @@ public class CatalogController {
         return ResponseEntity.status(HttpStatus.OK).body(responseUpdateCatalog);
     }
 
-    //상품 삭제
+    //(관리자) 상품 삭제
     @DeleteMapping("/catalogs/{id}")
     public ResponseEntity<String> deleteCatalog(@PathVariable Long id){
         String result;
@@ -126,6 +127,4 @@ public class CatalogController {
 
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
-
-
 }

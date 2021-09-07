@@ -8,13 +8,13 @@ import java.util.Date;
 
 @Data
 public class CartDto implements Serializable {
-    private Integer cart_no;
-    private Integer id;
-    private Integer product_id;
-    private String product_name;
-    private Integer unit_price;
+    private Long cartNo;
+    private Long id;
+    private Long productId;
+    private String productName;
+    private Integer unitPrice;
     private String filename;
-    private String user_id;
-    private Date created_at;
-    private Date deleted_at;
+    private String userId;
+    private Date createdAt;
+    private Date deletedAt;
 }

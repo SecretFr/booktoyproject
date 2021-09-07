@@ -14,26 +14,25 @@ import java.util.Date;
 public class CartEntity implements Serializable {
     @Id
     @GeneratedValue
-    private Integer cart_no;
+    private Long cartNo;
 
     @Column(nullable = true)
     private Integer id;
 
-
     @Column(nullable = true)
-    private Integer product_id;
+    private Integer productId;
 
     @Column(nullable = false)
-    private String product_name;
+    private String productName;
 
     @Column(nullable = false)
-    private String unit_price;
+    private String unitPrice;
 
     @Column(nullable = true)
     private String filename;
 
     @Column(nullable = false)
-    private String user_id;
+    private String userId;
 
     @Column(nullable = false, insertable = false, updatable = false)
     @ColumnDefault(value="CURRENT_TIMESTAMP")

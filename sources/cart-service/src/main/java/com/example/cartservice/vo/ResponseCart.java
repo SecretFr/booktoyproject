@@ -6,10 +6,10 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseCart {
-    private Integer cart_no;
+    private Integer cartNo;
     private Integer id;
-    private Integer product_id;
-    private String product_name;
-    private Integer unit_price;
-    private String user_id;
+    private Integer productId;
+    private String productName;
+    private Integer unitPrice;
+    private String userId;
 }

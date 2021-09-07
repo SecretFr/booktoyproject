@@ -5,6 +5,7 @@ import com.example.cartservice.jpa.CartEntity;
 import com.example.cartservice.jpa.CartRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,28 @@ public class CartServiceImpl implements CartService{
         this.env = env;
     }
 
+    //장바구니 담기
+    @Override
+    public CartDto createCart(CartDto cartDto) {
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        CartEntity cartEntity = mapper.map(cartDto, CartEntity.class);
+        cartRepository.save(cartEntity);
+
+        CartDto returnVal = mapper.map(cartEntity, CartDto.class);
+
+        return returnVal;
+    }
 
     @Override
-    public String deleteCart(String productId) {
-        CartEntity cartEntity = cartRepository.findByUserId(productId);
+    public Iterable<CartEntity> getAllCarts() {
+        return cartRepository.findAll();
+    }
+
+    //cart 삭제
+    @Override
+    public String deleteCart(Long cartNo) {
+        CartEntity cartEntity = cartRepository.findByCartNo(cartNo);
         if(cartEntity == null){
             try{
                 throw new Exception();
@@ -51,9 +70,6 @@ public class CartServiceImpl implements CartService{
         return cartRepository.findByUserId(userId);
     }
 
-    @Override
-    public Iterable<CartEntity> getAllCarts() {
-        return cartRepository.findAll();
-    }
+
 
 }

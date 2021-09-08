@@ -70,6 +70,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         response.addHeader("token", token);
         response.addHeader("userId", userDtails.getUserId());
+        response.addHeader("email", userDtails.getEmail());
 
 
     }

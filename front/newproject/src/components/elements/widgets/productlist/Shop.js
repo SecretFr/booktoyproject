@@ -24,7 +24,7 @@ export default function Shop({categoryName}) {
                             <option value="priceLowToHigh">Price - Low to High</option>
                         </select>
                     </div>
-                    <p>Showing 15 of 144 result</p>
+                    <p>Showing 1 of 144 result</p>
                 </div>
                 <div className="shop-tab">
                     <button className={ onActive ? "active" : ""} onClick={()=> onActive ? "" : handleLayout(10,6)}><i className="fa fa-th-large"></i></button>

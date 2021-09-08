@@ -5,7 +5,7 @@ export default function Brand(){
     const [ newBrand, setNewBrand ] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3005/brand")
+        fetch("http://localhost:3002/brand")
         .then(res => {
             return res.json();
         })

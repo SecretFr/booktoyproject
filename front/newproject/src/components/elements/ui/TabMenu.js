@@ -5,7 +5,7 @@ export default function TabMenu({setCategoryName, categoryName}){
     const [ categoryData, setCategoryData ] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3005/category")
+        fetch("http://localhost:3002/category")
         .then(res => {
             return res.json();
         })

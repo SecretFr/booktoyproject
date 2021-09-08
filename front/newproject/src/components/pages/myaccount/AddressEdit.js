@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-export default function AddressEdit(){
+export default function AddressEdit(props){
 
     return(
         <div className="card-body">
@@ -13,11 +13,10 @@ export default function AddressEdit(){
                     <div className="row">
                         <div className="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
                             <div className="entries-info text-center">
-                                <p>John Doe</p>
-                                <p>Paul Park </p>
-                                <p>Lorem ipsum dolor set amet</p>
-                                <p>NYC</p>
-                                <p>New York</p>
+                                <p>EMAIL: {props.email}</p>
+                                <p>ZIPCODE: {props.zipcode}</p>
+                                <p>ADDRESS: {props.address1}</p>
+                                <p>ADDRESS INFO: {props.address2}</p>
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">

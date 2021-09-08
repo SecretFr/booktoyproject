@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router";
+import SingnUpAxios from '../../../api/SignUpAxios';
 
 export default function SignUp() {
 
@@ -8,30 +9,24 @@ export default function SignUp() {
     const [usersDatas, setUsersDatas] = useState([]);
 
     const [values, setValues] = useState({
-        userId: '',
         email: '',
         password: '',
         confirmPassword: '',
-        phone: '',
         name: '',
     })
 
     const [guideTxts, setGuideTxts] = useState({
-        userGuide : '최대 20자 까지 가능합니다.',
         emailGuide : '이메일 형식에 맞게 작성해 주세요.',
         pwdGuide : '숫자와 문자를 조합해서 최소 8글자는 입력해 주세요.',
         confirmPwdGuide : '한번더 입력해 주세요.',
-        nameGuide : '',
-        phoneGuide : '. 을 입력하지 말아 주세요.'
+        nameGuide : ''
     });
 
     const [error, setError] = useState({
-        userIdError: '',
         emailError: '',
         pwdError: '',
         confirmPwd: '',
-        nameError: '',
-        phoneError: ''
+        nameError: ''
       })
 
 
@@ -65,44 +60,42 @@ export default function SignUp() {
 
 
       const onTextCheck = () => {
-        let userIdError = "";
         let emailError = "";
         let pwdError = "";
         let confirmPwd = "";
         let nameError = "";
-        let phoneError = "";
         
     
-        if (!isUserId(values.userId)) userIdError = "아이디 형식을 확인 해 주세요.( 한글 불가 )";
+        // if (!isUserId(values.userId)) userIdError = "아이디 형식을 확인 해 주세요.( 한글 불가 )";
         if (!isEmail(values.email)) emailError = "email 형식이 아닙니다.";
         if (!isPwd(values.password)) pwdError = "비밀번호 조건을 만족 할 수 없습니다.";
         if (!confirmPassword(values.password, values.confirmPassword)) confirmPwd = "비밀번호가 일치하지 않습니다.";
         if (values.userId === values.password) pwdError = "아이디를 비밀번호로 사용 할 수 없습니다."; 
-        if (!isPhone(values.phone)) phoneError = "휴대폰 형식이 아닙니다.";
+        // if (!isPhone(values.phone)) phoneError = "휴대폰 형식이 아닙니다.";
 
         if (values.name.length === 0) nameError = "이름을 입력해주세요.";
     
         //console.log(userIdError, emailError, pwdError, confirmPwd, nameError, phoneError, userTypesError, useConfirmError)
         setError({
-          userIdError, emailError, pwdError, confirmPwd, nameError, phoneError
+          emailError, pwdError, confirmPwd, nameError
         })
     
-        if (userIdError || emailError || pwdError || confirmPwd || nameError || phoneError ) return false;
+        if (emailError || pwdError || confirmPwd || nameError) return false;
         return true;
       }
 
     let process = require('../../../myProcess.json');
 
-    useEffect(()=>{
-        fetch(`http://${process.IP}:${process.PORT}/users`)
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            setUsersDatas(data);
-            console.log(data);
-        });
-    },[process.IP, process.PORT]);
+    // useEffect(()=>{
+    //     fetch(`http://localhost:8000/user-service/users/${sessionStorage.userId}`)
+    //     .then(res => {
+    //         return res.json();
+    //     })
+    //     .then(data => {
+    //         setUsersDatas(data);
+    //         console.log(data);
+    //     });
+    // },[]);
 
     const handleChangeForm = (e) => {
         setValues({ 
@@ -122,18 +115,18 @@ export default function SignUp() {
 
         else {
         
-            fetch(`http://${process.IP}:${process.PORT}/users`,{
+            fetch(`user-service/users`,{
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
+                    'API-Key': 'secret',
+                    "Access-Control-Allow-Origin" : `http://localhost:8000/user-service/users`,
+                    "Access-Control-Allow-Credentials": true
                 },
                 body: JSON.stringify({
-                    id : usersDatas.length + 1,
-                    userId: values.userId,
-                    password: values.password,
-                    name: values.name,
                     email: values.email,
-                    phone: values.phone
+                    password: values.password,
+                    name: values.name
                 }),
             }).
             then(
@@ -142,7 +135,7 @@ export default function SignUp() {
                 //window.location.href = '/'
 
             )
-            }
+        }
     }
 
     return(
@@ -155,28 +148,25 @@ export default function SignUp() {
                     <h5>SignUp</h5>
                 </div>
                 <div className="row">
-                    
-                    <div className="col-lg-12 col-md-12">
+
+                <div className="col-lg-12 col-md-12">
                         <div className="billing-info">
-                            <label>Id</label>
+                            <label>Email</label>
                             <input 
-                                type="text"
-                                name="userId"
-                                value={values.userId}
+                                type="email"
+                                name="email"
+                                value={values.email}
                                 onChange={handleChangeForm}
-                                // placeholder="ID를 입력해 주세요."
                             />
                         </div>
                     </div>
                     {
-                        error.userIdError 
+                        error.emailError
                             ? 
-                                <div style={{ color: "red", fontSize: "10px", margin: '-5px 0 10px 15px' }}>{error.userIdError}</div>
+                                <div style={{ color: "red", fontSize: "10px", margin: '-5px 0 10px 15px' }}>{error.emailError}</div>
                             :
-                                <div style={{ color: "gray", fontSize: "10px", margin: '-5px 0 10px 15px' }}>{guideTxts.userGuide}</div>
-                    }
-
-                    
+                                <div style={{ color: "gray", fontSize: "10px", margin: '-5px 0 10px 15px' }}>{guideTxts.emailGuide}</div>
+                    }                    
                     
                     <div className="col-lg-12 col-md-12">
                         <div className="billing-info">
@@ -216,24 +206,7 @@ export default function SignUp() {
                             :
                                 <div style={{ color: "gray", fontSize: "10px", margin: '-5px 0 10px 15px' }}>{guideTxts.confirmPwdGuide}</div>
                     }
-                    <div className="col-lg-12 col-md-12">
-                        <div className="billing-info">
-                            <label>Email</label>
-                            <input 
-                                type="email"
-                                name="email"
-                                value={values.email}
-                                onChange={handleChangeForm}
-                            />
-                        </div>
-                    </div>
-                    {
-                        error.emailError
-                            ? 
-                                <div style={{ color: "red", fontSize: "10px", margin: '-5px 0 10px 15px' }}>{error.emailError}</div>
-                            :
-                                <div style={{ color: "gray", fontSize: "10px", margin: '-5px 0 10px 15px' }}>{guideTxts.emailGuide}</div>
-                    }
+                   
                     <div className="col-lg-12 col-md-12">
                         <div className="billing-info">
                             <label>Name</label>
@@ -252,24 +225,7 @@ export default function SignUp() {
                             :
                                 <div style={{ color: "gray", fontSize: "10px", margin: '-5px 0 10px 15px' }}>{guideTxts.nameGuide}</div>
                     }
-                    <div className="col-lg-12 col-md-12">
-                        <div className="billing-info">
-                            <label>Phone</label>
-                            <input 
-                                type="tel"
-                                name="phone"
-                                value={values.phone}
-                                onChange={handleChangeForm}
-                            />
-                        </div>
-                    </div>
-                    {
-                        error.phoneError
-                            ? 
-                                <div style={{ color: "red", fontSize: "10px", margin: '-5px 0 10px 15px' }}>{error.phoneError}</div>
-                            :
-                                <div style={{ color: "gray", fontSize: "10px", margin: '-5px 0 10px 15px' }}>{guideTxts.phoneGuide}</div>
-                    }
+                    
                     
                 </div>
                 

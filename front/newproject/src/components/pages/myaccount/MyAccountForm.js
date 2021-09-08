@@ -1,10 +1,32 @@
 import ChangePassword from "./ChangePassword";
 import AddressEdit from "./AddressEdit";
 import SignUp from "./SignUp";
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
+import axios from 'axios'
 
 
 export default function MyAccountForm() {
+    const axios = require('axios')
+    const [usersDatas, setUsersDatas] = useState([]);
+
+    useEffect(()=>{
+        axios({
+            method: 'GET',
+            url: `/user-service/users/${sessionStorage.userId}`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.token}`
+            }
+        })
+        .then(res => {
+            setUsersDatas(res.data)
+            console.log(res.data);
+        })
+        .catch(res => { 
+            console.log(res) 
+        })
+    },[]);
+
 
     return (
         <div className="myaccount-area pb-80 pt-100">
@@ -16,7 +38,7 @@ export default function MyAccountForm() {
                                 <div className="accordion-item single-my-account mb-20 card">
                                     <div className="panel-heading card-header" id="panelsStayOpen-headingOne">
                                         <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                            <h3 className="panel-title"><span>1 .</span> Edit your account information </h3>
+                                            <h3 className="panel-title"><span>1 .</span> Edit your account information</h3>
                                         </button>
                                     </div>
                                     <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
@@ -40,7 +62,10 @@ export default function MyAccountForm() {
                                         </button>
                                     </div>
                                     <div id="panelsStayOpen-collapseThree" className="accordion-collapse collapse hide" aria-labelledby="panelsStayOpen-headingThree">
-                                        <AddressEdit />
+                                        <AddressEdit email={usersDatas.email} 
+                                                    zipcode={usersDatas.zipcode} 
+                                                    address1={usersDatas.address1} 
+                                                    address2={usersDatas.address2}/>
                                     </div>
                                 </div>
                             </div>

@@ -7,23 +7,33 @@
         },
         {
             "id" : 2,
-            "name" : "Features",
-            "url" : "/features"
+            "name" : "소설",
+            "url" : "/productlist/nonfiction"
         },
         {
             "id" : 3,
-            "name" : "Pricing",
-            "url" : "/pricing"
+            "name" : "유아",
+            "url" : "/productlist/children"
         },
         {
             "id" : 4,
-            "name" : "FAQs",
-            "url" : "/faqs"
+            "name" : "인문",
+            "url" : "/productlist/humanities"
         },
         {
             "id" : 5,
-            "name" : "About",
-            "url" : "/about"
+            "name" : "과학",
+            "url" : "/productlist/science"
+        },
+        {
+            "id" : 6,
+            "name" : "수험",
+            "url" : "/productlist/study"
+        },
+        {
+            "id" : 7,
+            "name" : "만화",
+            "url" : "//productlist/cartoon"
         }
     ],
     "sidemenu" : [

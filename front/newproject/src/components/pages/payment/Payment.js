@@ -6,6 +6,7 @@ import PaymentMethod from '../../elements/widgets/paymentmethod/PaymentMethod';
 
 import { Fragment } from 'react';
 import React, { Component } from 'react';
+import Delivery from '../../elements/ui/Delivery';
 
 
 export default function Payment() {
@@ -14,9 +15,8 @@ export default function Payment() {
         <Fragment>
             <Header />
             <Bread productName="Payment" />
-            <p>결제하기1111111111111111111111111111111111111111111111111</p>
+            <Delivery />
             <PaymentMethod />
-
             <Footer />
         </Fragment>
     );

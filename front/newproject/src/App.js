@@ -13,6 +13,7 @@ import ProductList from './components/pages/productlist/ProductList';
 import Features from './components/pages/Features/Features';
 import MyAccount from './components/pages/myaccount/MyAccount';
 import Payment from './components/pages/payment/Payment';
+import Finished from './components/pages/finished/Finished';
 import Test from './components/pages/Test/Test';
 
 import "./assets/css/mystyle.css";
@@ -28,6 +29,12 @@ import ToTop from "./utilities/ToTop";
 
  
 function App() {
+
+  const token = sessionStorage.getItem('token');
+
+  if(!token){
+      return <Login/>
+  }
 
   return (
     <BrowserRouter>
@@ -48,13 +55,10 @@ function App() {
         <Route exact path="/myaccount"><MyAccount/></Route>
 
         <Route exact path="/payment"><Payment/></Route>
+        <Route exact path="/finished"><Finished/></Route>
 
 
         <Route exact path="/test"><Test/></Route>
-
-        {/* <Provider store={store}>
-          <Route exact path="/reduxsample"><ReduxSample/></Route>
-        </Provider> */}
 
       </Switch>
       </ToTop>

@@ -71,49 +71,19 @@
   ],
   "cart": [
     {
-      "id": "1",
-      "name": "Lorem ipsum jacket",
+      "id": "7",
+      "name": "Lorem ipsum fashion female coat",
       "image": [
-        "/assets/img/product/fashion/1.jpg",
-        "/assets/img/product/fashion/3.jpg",
-        "/assets/img/product/fashion/6.jpg",
-        "/assets/img/product/fashion/8.jpg",
+        "/assets/img/product/fashion/7.jpg",
+        "/assets/img/product/fashion/5.jpg",
+        "/assets/img/product/fashion/2.jpg",
+        "/assets/img/product/fashion/4.jpg",
         "/assets/img/product/fashion/9.jpg"
       ],
-      "price": 12.45,
-      "discount": 10,
-      "qty": 1,
-      "color": "",
-      "size": ""
-    },
-    {
-      "id": "3",
-      "name": "Lorem ipsum jacket",
-      "image": [
-        "/assets/img/product/fashion/3.jpg",
-        "/assets/img/product/fashion/1.jpg",
-        "/assets/img/product/fashion/6.jpg",
-        "/assets/img/product/fashion/8.jpg",
-        "/assets/img/product/fashion/9.jpg"
-      ],
-      "price": 17.45,
+      "price": 55.5,
       "discount": 40,
       "qty": 1,
-      "size": ""
-    },
-    {
-      "id": "6",
-      "name": "Lorem ipsum jacket",
-      "image": [
-        "/assets/img/product/fashion/6.jpg",
-        "/assets/img/product/fashion/3.jpg",
-        "/assets/img/product/fashion/1.jpg",
-        "/assets/img/product/fashion/8.jpg",
-        "/assets/img/product/fashion/9.jpg"
-      ],
-      "price": 19.85,
-      "discount": 0,
-      "qty": 1,
+      "color": "",
       "size": ""
     },
     {
@@ -131,80 +101,9 @@
       "qty": 1,
       "color": "",
       "size": ""
-    },
-    {
-      "id": "9",
-      "name": "Lorem ipsum fashion female top",
-      "image": [
-        "/assets/img/product/fashion/9.jpg",
-        "/assets/img/product/fashion/7.jpg",
-        "/assets/img/product/fashion/5.jpg",
-        "/assets/img/product/fashion/2.jpg",
-        "/assets/img/product/fashion/4.jpg"
-      ],
-      "price": 35.6,
-      "discount": 0,
-      "qty": 1,
-      "color": "",
-      "size": ""
-    },
-    {
-      "id": "11",
-      "name": "Lorem ipsum speaker",
-      "image": [
-        "/assets/img/product/electronics/2.jpg",
-        "/assets/img/product/electronics/3.jpg",
-        "/assets/img/product/electronics/4.jpg",
-        "/assets/img/product/electronics/5.jpg",
-        "/assets/img/product/electronics/6.jpg"
-      ],
-      "price": 10.6,
-      "discount": 10,
-      "qty": 1,
-      "color": "",
-      "size": ""
     }
   ],
   "wish": [
-    {
-      "id": "3",
-      "name": "Lorem ipsum jacket",
-      "image": [
-        "/assets/img/product/fashion/3.jpg",
-        "/assets/img/product/fashion/1.jpg",
-        "/assets/img/product/fashion/6.jpg",
-        "/assets/img/product/fashion/8.jpg",
-        "/assets/img/product/fashion/9.jpg"
-      ],
-      "price": 17.45,
-      "discount": 40
-    },
-    {
-      "id": "4",
-      "name": "Lorem ipsum fashion coat",
-      "image": [
-        "/assets/img/product/fashion/4.jpg",
-        "/assets/img/product/fashion/2.jpg",
-        "/assets/img/product/fashion/5.jpg",
-        "/assets/img/product/fashion/7.jpg",
-        "/assets/img/product/fashion/9.jpg"
-      ],
-      "price": 15.5,
-      "discount": 0
-    },
-    {
-      "id": "7",
-      "name": "Lorem ipsum fashion female coat",
-      "image": [
-        "/assets/img/product/fashion/7.jpg",
-        "/assets/img/product/fashion/5.jpg",
-        "/assets/img/product/fashion/2.jpg",
-        "/assets/img/product/fashion/4.jpg",
-        "/assets/img/product/fashion/9.jpg"
-      ],
-      "price": 55.5,
-      "discount": 40
-    },
     {
       "id": "1",
       "name": "Lorem ipsum jacket",
@@ -264,39 +163,54 @@
     {
       "children": [
         {
-          "id": 1,
-          "name": "test01",
-          "url": "/test01"
-        },
-        {
           "id": 2,
-          "name": "test02",
-          "url": "/test02"
+          "name": "소설",
+          "url": "/productlist/nonfiction"
         },
         {
           "id": 3,
-          "name": "test03",
-          "url": "/test03"
+          "name": "유아",
+          "url": "/productlist/children"
+        },
+        {
+          "id": 4,
+          "name": "인문",
+          "url": "/productlist/humanities"
+        },
+        {
+          "id": 5,
+          "name": "과학",
+          "url": "/productlist/science"
+        },
+        {
+          "id": 6,
+          "name": "수험",
+          "url": "/productlist/study"
+        },
+        {
+          "id": 7,
+          "name": "만화",
+          "url": "//productlist/cartoon"
         }
       ],
       "id": 2,
-      "name": "Features",
-      "url": "/features"
-    },
-    {
-      "id": 3,
-      "name": "SHOP",
+      "name": "Book Categories",
       "url": "/productlist"
     },
     {
+      "id": 3,
+      "name": "Wishlist",
+      "url": "/wishlist"
+    },
+    {
       "id": 4,
-      "name": "FAQs",
-      "url": "/faqs"
+      "name": "Cart",
+      "url": "/cart"
     },
     {
       "id": 5,
-      "name": "About",
-      "url": "/about"
+      "name": "MyAccount",
+      "url": "/myaccount"
     }
   ],
   "sidemenu": [
@@ -313,12 +227,6 @@
       "count": 0
     },
     {
-      "id": 3,
-      "name": "las la-random",
-      "url": "/compare",
-      "count": 0
-    },
-    {
       "id": 4,
       "name": "las la-bookmark",
       "url": "/wishlist",
@@ -328,85 +236,62 @@
       "id": 5,
       "name": "las la-shopping-bag",
       "url": "/cart",
-      "count": 7
+      "count": 10
     }
   ],
   "category": [
     {
       "id": 0,
-      "name": "AllCategories"
+      "name": "All Categories"
     },
     {
       "id": 1,
-      "name": "fashion"
+      "name": "인문"
     },
     {
       "id": 2,
-      "name": "men"
+      "name": "소설"
     },
     {
       "id": 3,
-      "name": "women"
+      "name": "자기계발"
     },
     {
       "id": 4,
-      "name": "electronics"
+      "name": "수험서"
     },
     {
       "id": 5,
-      "name": "plant"
+      "name": "어린이"
     },
     {
       "id": 6,
-      "name": "organic food"
-    },
-    {
-      "id": 7,
-      "name": "flower"
-    },
-    {
-      "id": 8,
-      "name": "book"
-    },
-    {
-      "id": 9,
-      "name": "cosmetics"
-    },
-    {
-      "id": 10,
-      "name": "accessories"
+      "name": "외국어"
     }
   ],
   "brand": [
     {
       "id": 1,
-      "name": "JavaScript",
-      "img": "fab fa-js-square",
-      "content": "자바스크립트 힘들어요. 공부 싫어요"
+      "name": "국내 가장 저렴한 온라인 북스토어",
+      "img": "fad fa-piggy-bank"
     },
     {
       "id": 2,
-      "name": "React",
+      "name": "국내 최다 상품",
       "img": "fab fa-react",
-      "content": "리액트 제이에스. 알고보면 쉬워요."
+      "content": ""
     },
     {
       "id": 3,
-      "name": "HTML5",
-      "img": "fab fa-html5",
-      "content": "HTML5 에이치티엠엘파이브 시멘틱코드"
+      "name": "새벽 배송 서비스 시작",
+      "img": "fab fa-react",
+      "content": ""
     },
     {
       "id": 4,
-      "name": "GitHub",
+      "name": "7일 내 무료 환불",
       "img": "fab fa-github",
-      "content": "깃허브 아이콘 고양이인가? "
-    },
-    {
-      "id": 5,
-      "name": "CSS3",
-      "img": "fab fa-css3-alt",
-      "content": "CSS3 씨에스에스쑤리"
+      "content": " "
     }
   ],
   "product": [

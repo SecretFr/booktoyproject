@@ -33,7 +33,7 @@ export default function CartTable() {
                                         <th>Unit Price</th>
                                         <th>Qty</th>
                                         <th>Subtotal</th>
-                                        <th>action</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -55,7 +55,7 @@ export default function CartTable() {
                     <div className="col-lg-12">
                         <div className="cart-shiping-update-wrapper">
                             <div className="cart-shiping-update">
-                                <a href="/shop-grid-standard">Continue Shopping</a>
+                                <a href="/productlist">Continue Shopping</a>
                             </div>
                             <div className="cart-clear">
                                 <button>Clear Shopping Cart</button>

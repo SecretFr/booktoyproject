@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
-
+import React, { Component, useState } from 'react';
+import EditAccount from './EditAccount';
+import {Link} from 'react-router-dom';
 
 export default function AddressEdit(props){
-
+    // const [comp, setComp] = useState(EditAccout)
+    // console.log(props)
     return(
         <div className="card-body">
             <div className="myaccount-info-wrapper">
@@ -21,8 +23,10 @@ export default function AddressEdit(props){
                         </div>
                         <div className="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
                             <div className="entries-edit-delete text-center">
-                                <button className="edit">Edit</button>
-                                <button>Delete</button>
+                                <Link to="/myaccount/editaccount">Edit</Link>
+                                
+                                {/* <button className="edit"></button> */}
+                                {/* <button>Delete</button> */}
                             </div>
                         </div>
                     </div>

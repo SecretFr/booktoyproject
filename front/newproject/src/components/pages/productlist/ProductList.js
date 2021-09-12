@@ -28,7 +28,7 @@ export default function ProductList() {
         <>
         <Header/>
         <Bread
-            productName = "SHOP"
+            productName = "All"
         />
         <div className="shop-area pt-95 pb-100">
             <div className="container">

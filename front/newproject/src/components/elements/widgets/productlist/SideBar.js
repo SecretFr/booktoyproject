@@ -38,7 +38,7 @@ export default function SideBar({setCategoryName}) {
                         </form>
                     </div>
                 </div>
-                <div className="sidebar-widget">
+                {/* <div className="sidebar-widget">
                     <h4 className="pro-sidebar-title">Categories </h4>
                     <div className="sidebar-widget-list mt-30">
                         <ul>
@@ -47,8 +47,8 @@ export default function SideBar({setCategoryName}) {
                             
                         </ul>
                     </div>
-                </div>
-                <div className="sidebar-widget mt-50">
+                </div> */}
+                {/* <div className="sidebar-widget mt-50">
                     <h4 className="pro-sidebar-title">Color </h4>
                     <div className="sidebar-widget-list mt-20">
                         <ul>
@@ -79,8 +79,8 @@ export default function SideBar({setCategoryName}) {
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div className="sidebar-widget mt-40">
+                </div> */}
+                {/* <div className="sidebar-widget mt-40">
                     <h4 className="pro-sidebar-title">Size </h4>
                     <div className="sidebar-widget-list mt-20">
                         <ul>
@@ -111,8 +111,8 @@ export default function SideBar({setCategoryName}) {
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div className="sidebar-widget mt-50">
+                </div> */}
+                {/* <div className="sidebar-widget mt-50">
                     <h4 className="pro-sidebar-title">Tag </h4>
                     <div className="sidebar-widget-tag mt-25">
                         <ul>
@@ -142,7 +142,7 @@ export default function SideBar({setCategoryName}) {
                             <li><button>christmas</button></li>
                         </ul>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

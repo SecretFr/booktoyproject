@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class ResponseUser {
+    private Long id;
     private String email;
     private String password;
     private String name;

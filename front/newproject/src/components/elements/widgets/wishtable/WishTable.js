@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router";
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 export default function WishTable() {
 
@@ -9,39 +10,37 @@ export default function WishTable() {
     const [wishDatas, setWishDatas] = useState([]);
 
     let process = require('../../../../myProcess.json');
+    const fetchItem = async () =>{
+        await axios.get(`cart-service/carts/${sessionStorage.userId}`)
+        .then(data=>{
+            setWishDatas(data.data)
+            console.log(data.data)
+        })
+        .catch(error => console.log(error))
+    }
 
     useEffect(()=>{
-        fetch(`http://${process.IP}:${process.PORT}/wish`)
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            setWishDatas(data);
-        });
-    },[process.IP, process.PORT]);
+        fetchItem();
+    },[]);
 
-    const handleDelete = (id) => {
-        
-        fetch(`http://${process.IP}:${process.PORT}/wish/${id}`,{
-            method: "DELETE"
-        }).then(
-            alert("삭제되었습니다."),
-            fetch(`http://${process.IP}:${process.PORT}/wish`)
-            .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                setWishDatas(data);
-                console.log(data);
-            })
-        )
+    const handleDelete = (cartNo) => {
+        axios.delete(`cart-service/carts/${cartNo}`)
+        .then(data=>{
+            alert("장바구니 삭제")
+            // setWishDatas(data.data)
+            console.log(data.data)
+            fetchItem(); 
+        })
+        .catch(error => console.log(error))   
     }
+
+    
 
     // const handleAllDelete = (e) => {
     //     alert(wishIdDatas);
-    //     // fetch(`http://${process.IP}:${process.PORT}/wish/${wishIds}`,{
-    //     //         method: "DELETE"
-    //     // })
+    //     fetch(`http://${process.IP}:${process.PORT}/wish/${wishIds}`,{
+    //             method: "DELETE"
+    //     })
         
     //     wishIdDatas.map(item => (
     //         fetch(`http://${process.IP}:${process.PORT}/wish/${item}`,{
@@ -52,29 +51,19 @@ export default function WishTable() {
     //         setWishDatas([]),
     //         history.push(`/`)
 
-    //         // fetch(`http://${process.IP}:${process.PORT}/wish`)
-    //         // .then(
-    //         //     res => {
-    //         //     return res&&res.json();
-    //         // })
-    //         // .then(data => {
-    //         //     data ? setWishDatas(data) : alert("nodata");
-    //         // })
+    //         fetch(`http://${process.IP}:${process.PORT}/wish`)
+    //         .then(
+    //             res => {
+    //             return res&&res.json();
+    //         })
+    //         .then(data => {
+    //             data ? setWishDatas(data) : alert("nodata");
+    //         })
     //     )
 
     // }
 
-    const wishTableList = wishDatas.map((item, idx) => (
-        
-        <tr key={idx}>
-            <td className="product-thumbnail"><Link to={`/productdetail/${item.id}`}><img className="img-fluid" src={item.image[0]} alt="/" /></Link></td>
-            <td className="product-name text-center"><Link to={`/productdetail/${item.id}`}>{item.name}</Link></td>
-            <td className="product-price-cart"><span className="amount old">{item.price}</span><span className="amount">{(item.price * ((100+item.discount)/100)).toFixed(2)}</span></td>
-            <td className="product-wishlist-cart"><Link to={`/productdetail/${item.id}`}>Select option</Link></td>
-            <td className="product-remove"><button onClick={()=>handleDelete(item.id)}><i className="fa fa-times"></i></button></td>
-        </tr>
-
-    )) 
+    
     // : 
     //     <tr>
     //     <td className="product-thumbnail">a</td>
@@ -102,7 +91,18 @@ export default function WishTable() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {wishTableList}
+                                    {wishDatas && wishDatas.map((item, idx) => (
+                                            // <span className="amount">{(item.price * ((100+item.discount)/100)).toFixed(2)}</span>
+                                            <tr key={idx}>
+                                                <td className="product-thumbnail"><Link to={`/productdetail/${item.productId}`}><img className="img-fluid" src="" alt="/" /></Link></td>
+                                                <td className="product-name text-center"><Link to={`/productdetail/${item.productId}`}>{item.productName}</Link></td>
+                                                <td className="product-price-cart"><span className="amount">{item.unitPrice}</span></td>
+                                                <td className="product-wishlist-cart"><Link to={`/productdetail/${item.productId}`}>Select option</Link></td>
+                                                <td className="product-remove"><button onClick={()=>handleDelete(item.cartNo)}><i className="fa fa-times"></i></button></td>
+                                            </tr>
+
+                                        )) 
+                                    }
                                 </tbody>
                             </table>
                         </div>

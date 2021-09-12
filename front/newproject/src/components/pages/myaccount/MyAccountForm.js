@@ -65,7 +65,8 @@ export default function MyAccountForm() {
                                         <AddressEdit email={usersDatas.email} 
                                                     zipcode={usersDatas.zipcode} 
                                                     address1={usersDatas.address1} 
-                                                    address2={usersDatas.address2}/>
+                                                    address2={usersDatas.address2} 
+                                                    wallet={usersDatas.wallet}/>
                                     </div>
                                 </div>
                             </div>

@@ -8,14 +8,14 @@ import React, {useState} from 'react';
 import { useParams } from 'react-router';
 
 export default function ProductList() {
-    const { url } = useParams();
-    const [categoryName, setCategoryName] = useState(url);
+    // const { url } = useParams();
+    const [categoryName, setCategoryName] = useState('novel');
 
     return(
         <>
         <Header/>
         <Bread
-            productName = "SHOP"
+            productName = "소설"
         />
         <div className="shop-area pt-95 pb-100">
             <div className="container">

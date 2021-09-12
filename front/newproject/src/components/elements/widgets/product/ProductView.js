@@ -10,6 +10,25 @@ export default function ProductView({categoryName, sliceNumber, columNumber, pos
     // console.log("colnumNumber"+columNumber)
     const [newData, setNewData] = useState([]);
     console.log(cateNo)
+
+    // useEffect(()=>{
+    //     const fetchPosts = async() => {
+    //         await axios.get("/catalog-service/catalogs")
+    //         .then(data => {
+    //             setPosts(data.data)
+    //             // console.log("Shop: ")
+    //             // console.log(data.data)
+    //         })
+    //         .catch(error => console.log(error))
+    //     }
+    //     fetchPosts();
+    // },[])
+    
+    // useEffect(() => {
+    //     setNewData(posts)
+    //     console.log("newData")
+    //     console.log(newData)
+    // })
     // const {cateNo} = useParams();
     // const {url} = useParams();
     // console.log(cateNo);
@@ -78,102 +97,90 @@ export default function ProductView({categoryName, sliceNumber, columNumber, pos
     //     )
     // }
 
-    //장바구니에 담기
+    // 장바구니에 담기
     const handlePutWishList = (productId) => {
         
-        fetch(`http://${process.IP}:${process.PORT}/product/${productId}`)
-        .then(res => {
-            return res.json();
+        axios.post(`/cart-service/carts/${sessionStorage.userId}`, {
+            productId: productId
         })
-        .then(data => {
-            fetch(`http://${process.IP}:${process.PORT}/wish/`,{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    productId: data.productId,
-                    productName: data.productName,
-                    filename: data.filename,
-                    unitPrice: data.unitPrice,
-                    qty: data.qty
-                }),
-            })
-        }).then(
-            alert("success")
-        )
+        .then(res=>{
+            alert("장바구니 담기 성공")
+            console.log(res)
+        })
+        .catch(res=>{
+            alert("장바구니 담기 실패")
+            console.log(res)
+        })
     }
-
-    const productList = posts.map((item, index) => (   
-        <div className={`col-xl-${columNumber} col-md-6 col-lg-${columNumber} col-sm-6`} key={index}>
-            <div className="product-wrap mb-25">
-                <div className="product-img">
-                    <Link to={`/productdetail/${item.productId}`}>
-                        <img className="default-img" src="/assets/img/product/fashion/8.jpg" alt="" />
-                        <img className="hover-img" src="/assets/img/product/fashion/6.jpg" alt="" />
-                    </Link>
-                    {/* <div className="product-img-badges">
-                        {
-                            item.discount > 0 ? <span className="pink">{item.discount}%</span> : ''
-                        }
-                        {
-                            item.new ? <span className="purple">new</span> : ''
-                        }
-                    </div> */}
-                    <div className="product-action">
-                        <div className="pro-same-action pro-wishlist">
-                            <button
-                                value={item.productId}
-                                onClick={() => handlePutWishList(item.productId)}
-                            >
-                                <i className="las la-bookmark"></i>
-                            </button>
-                        </div>
-                        <div className="pro-same-action pro-cart">
-                            <button disabled="" className="active">{categoryName}</button>
-                        </div>
-                        <div className="pro-same-action pro-quickview">
-                            <Link to={`/productdetail/${item.productId}`}>
-                                <i className="las la-eye"></i>
-                            </Link>
-                        {/* <button disabled="" className="active">Buy</button> */}
-                        </div>
-                        {/* <div className="pro-same-action pro-quickview">
-                            <button 
-                                className="" 
-                                title={item.id} 
-                                onClick={() => handlePutCompareList(item.id)} 
-                                value={item.id}
-                            >
-                                <i className="las la-eye"></i>
-                            </button>
-                        </div> */}
-                    </div>
-                </div>
-                <div className="product-content text-center">
-                    <h3><Link to={`/productdetail/${item.productId}`}>{item.productName}</Link></h3>
-                    {/* <div className="product-rating">
-                        {item.rating && item.rating > 0 ? (
-                            <Rating ratingValue={item.rating} />
-                        ) : (
-                        ""
-                        )}
-                    </div> */}
-                    <div className="product-price">
-                        <span>{item.unitPrice}원</span> 
-                        {/* <span className="old">{(item.price * ((100+item.discount)/100)).toFixed(2)}</span> */}
-                    </div>
-                </div>
-            </div>
-        </div>        
-
-    )).slice(0, sliceNumber);
-
-    
 
     return(
         <div className="row mt-5">
-            {productList}
+            {posts &&
+                posts.map((item, index) => (   
+                    <div className={`col-xl-${columNumber} col-md-6 col-lg-${columNumber} col-sm-6`} key={index}>
+                        <div className="product-wrap mb-25">
+                            <div className="product-img">
+                                <Link to={`/productdetail/${item.productId}`}>
+                                    <img className="default-img" src="/assets/img/product/fashion/8.jpg" alt="" />
+                                    <img className="hover-img" src="/assets/img/product/fashion/6.jpg" alt="" />
+                                </Link>
+                                {/* <div className="product-img-badges">
+                                    {
+                                        item.discount > 0 ? <span className="pink">{item.discount}%</span> : ''
+                                    }
+                                    {
+                                        item.new ? <span className="purple">new</span> : ''
+                                    }
+                                </div> */}
+                                <div className="product-action">
+                                    <div className="pro-same-action pro-wishlist">
+                                        <button
+                                            value={item.productId}
+                                            onClick={() => handlePutWishList(item.productId)}
+                                        >
+                                            <i className="las la-bookmark"></i>
+                                        </button>
+                                    </div>
+                                    <div className="pro-same-action pro-cart">
+                                        <button disabled="" className="active">{categoryName}</button>
+                                    </div>
+                                    <div className="pro-same-action pro-quickview">
+                                        <Link to={`/productdetail/${item.productId}`}>
+                                            <i className="las la-eye"></i>
+                                        </Link>
+                                    {/* <button disabled="" className="active">Buy</button> */}
+                                    </div>
+                                    {/* <div className="pro-same-action pro-quickview">
+                                        <button 
+                                            className="" 
+                                            title={item.id} 
+                                            onClick={() => handlePutCompareList(item.id)} 
+                                            value={item.id}
+                                        >
+                                            <i className="las la-eye"></i>
+                                        </button>
+                                    </div> */}
+                                </div>
+                            </div>
+                            <div className="product-content text-center">
+                                <h3><Link to={`/productdetail/${item.productId}`}>{item.productName}</Link></h3>
+                                {/* <div className="product-rating">
+                                    {item.rating && item.rating > 0 ? (
+                                        <Rating ratingValue={item.rating} />
+                                    ) : (
+                                    ""
+                                    )}
+                                </div> */}
+                                <div className="product-price">
+                                    <span>{item.unitPrice}원</span> 
+                                    {/* <span className="old">{(item.price * ((100+item.discount)/100)).toFixed(2)}</span> */}
+                                </div>
+                            </div>
+                        </div>
+                    </div>        
+            
+                )).slice(0, sliceNumber)
+            }
         </div>
         
     );

@@ -26,8 +26,8 @@ export default function Shop({categoryName}) {
             await axios.get("/catalog-service/catalogs")
             .then(data => {
                 setPosts(data.data)
-                console.log("Shop: ")
-                console.log(data.data)
+                // console.log("Shop: ")
+                // console.log(data.data)
             })
             .catch(error => console.log(error))
         }

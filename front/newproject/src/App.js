@@ -17,6 +17,7 @@ import MyAccount from './components/pages/myaccount/MyAccount';
 import Payment from './components/pages/payment/Payment';
 import Finished from './components/pages/finished/Finished';
 import Test from './components/pages/Test/Test';
+import EditAccout from './components/pages/myaccount/EditAccount';
 
 import "./assets/css/mystyle.css";
 import "./assets/css/style.css";
@@ -54,9 +55,10 @@ function App() {
         <Route exact path="/features"><Features/></Route>
         <Route exact path="/productdetail/:id"><ProductDetail/></Route>
         <Route exact path="/productlist"><ProductList/></Route>
-        <Route exact path="/productlist/:url/:cateNo"><NovelList/></Route>
-        <Route exact path="/productlist/:url/:cateNo"><ChildList/></Route>
+        <Route exact path="/productlist/novel/1"><NovelList/></Route>
+        <Route exact path="/productlist/children/2"><ChildList/></Route>
         <Route exact path="/myaccount"><MyAccount/></Route>
+        <Route exact path="/myaccount/editaccount"><EditAccout/></Route>
 
         <Route exact path="/payment"><Payment/></Route>
         <Route exact path="/finished"><Finished/></Route>

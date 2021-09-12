@@ -5,14 +5,14 @@ import ProductView from '../product/ProductView';
 import Pagination from "../productlist/Pagination"
 
 export default function Novel({categoryName}) {
-    const {cateNo} = useParams();
+    // const {cateNo} = useParams();
     const [sliceNumber, setSliceNumber] = useState(6);
     const [columNumber, setColumNumber] = useState(0);
     const [onActive, setOnActive] = useState(true);
 
     const [posts, setPosts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1); 
-	const [postsPerPage] = useState(10); 
+	const [postsPerPage] = useState(6); 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     const handleLayout = (sln, coln) => {
@@ -20,15 +20,16 @@ export default function Novel({categoryName}) {
         setColumNumber(coln)
         setOnActive(!onActive)
     }
-
+    console.log("Novel: ")
+    console.log(posts)
     //페이징 처리
     useEffect(()=>{
         const fetchPosts = async() => {
-            await axios.get(`/catalog-service/catalogs/cate/${cateNo}`)
+            await axios.get(`/catalog-service/catalogs/cate/${1}`)
             .then(data => {
                 setPosts(data.data)
-                console.log("Shop: ")
-                console.log(data.data)
+                // console.log("Shop: ")
+                // console.log(data.data)
             })
             .catch(error => console.log(error))
         }
@@ -71,7 +72,7 @@ export default function Novel({categoryName}) {
                         columNumber = {columNumber}
                         categoryName = {categoryName}
                         posts={currentPosts}
-                        cateNo={cateNo}
+                        cateNo={1}
                     />
                     
                     

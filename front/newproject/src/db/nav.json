@@ -33,7 +33,7 @@
         {
             "id" : 7,
             "name" : "만화",
-            "url" : "//productlist/cartoon"
+            "url" : "/productlist/cartoon"
         }
     ],
     "sidemenu" : [

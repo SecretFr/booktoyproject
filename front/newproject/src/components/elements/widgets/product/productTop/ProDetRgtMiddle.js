@@ -9,34 +9,43 @@ export default function ProDetRgtMiddle() {
 
     const { id } = useParams();
 
-    const [ varData, setVardata ] = useState([]);
-    const [ color, setColor ] = useState("");
-    const [ size, setSize] = useState("");
-
-    var process = require('../../../../../myProcess.json');
+    const [ productData, setProductData ] = useState([]);
 
     useEffect(()=>{
-        fetch(`http://${process.IP}:${process.PORT}/product/${id}`)
+        fetch(`/catalog-service/catalogs/catalog/${id}`)
         .then(res => {
             return res.json();
         })
         .then(data => {
-            setVardata(data);
-            console.log(data.variation);
+            setProductData(data);
+            console.log(data);
         });
-    },[process.IP, process.PORT, id]);
+    },[]);
+    // const [ color, setColor ] = useState("");
+    // const [ size, setSize] = useState("");
+
+    // var process = require('../../../../../myProcess.json');
+
+    // useEffect(()=>{
+    //     fetch(`http://${process.IP}:${process.PORT}/product/${id}`)
+    //     .then(res => {
+    //         return res.json();
+    //     })
+    //     .then(data => {
+    //         setVardata(data);
+    //         console.log(data.variation);
+    //     });
+    // },[process.IP, process.PORT, id]);
     
     return (
         <Fragment>
-            <ColorAndSize 
+            {/* <ColorAndSize 
                 vData = {varData.variation}
                 setColor = {setColor}
                 setSize = {setSize}
-            />
+            /> */}
             <AddBuyAndCart 
-                data = {varData}
-                color = {color}
-                size = {size}
+                productId = {productData.productId}
             /> 
         </Fragment>
     

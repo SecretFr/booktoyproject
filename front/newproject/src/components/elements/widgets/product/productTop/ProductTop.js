@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
-
-
 import ProductDetailLeft from './ProductDetailLeft';
 import ProductDetailRight from './ProductDetailRight';
 
-export default function ProductTop() {
+export default function ProductTop({productId, productName, detail, unitPrice}) {
 
     return (
         
@@ -13,7 +11,11 @@ export default function ProductTop() {
             <div className="container">
                 <div className="row">
                     <ProductDetailLeft />
-                    <ProductDetailRight /> 
+                    <ProductDetailRight 
+                        productId = {productId}
+                        productName = {productName}
+                        detail = {detail}
+                        unitPrice = {unitPrice}/> 
                 </div>
             </div>
         </div>

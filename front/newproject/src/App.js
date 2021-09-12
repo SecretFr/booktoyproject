@@ -10,6 +10,8 @@ import Cart from './components/pages/cart/Cart';
 import Wishlist from './components/pages/wishlist/Wishlist';
 import ProductDetail from './components/pages/ProductDetail/ProductDetail';
 import ProductList from './components/pages/productlist/ProductList';
+import NovelList from './components/pages/productlist/NovelList';
+import ChildList from './components/pages/productlist/ChildList';
 import Features from './components/pages/Features/Features';
 import MyAccount from './components/pages/myaccount/MyAccount';
 import Payment from './components/pages/payment/Payment';
@@ -52,6 +54,8 @@ function App() {
         <Route exact path="/features"><Features/></Route>
         <Route exact path="/productdetail/:id"><ProductDetail/></Route>
         <Route exact path="/productlist"><ProductList/></Route>
+        <Route exact path="/productlist/:url/:cateNo"><NovelList/></Route>
+        <Route exact path="/productlist/:url/:cateNo"><ChildList/></Route>
         <Route exact path="/myaccount"><MyAccount/></Route>
 
         <Route exact path="/payment"><Payment/></Route>

@@ -1,8 +1,11 @@
 package com.example.catalogservice.controller;
 
 import com.example.catalogservice.dto.CatalogDto;
+import com.example.catalogservice.dto.CategoryDto;
 import com.example.catalogservice.entity.CatalogEntity;
+import com.example.catalogservice.entity.CategoryEntity;
 import com.example.catalogservice.service.CatalogService;
+import com.example.catalogservice.service.CategoryService;
 import com.example.catalogservice.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -23,12 +26,15 @@ import java.util.List;
 public class CatalogController {
     private Environment env;
     CatalogService catalogService;
+    CategoryService categoryService;
 
     @Autowired
     public CatalogController(Environment env,
-                             CatalogService catalogService){
+                             CatalogService catalogService,
+                             CategoryService categoryService){
         this.env = env;
         this.catalogService = catalogService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/health_check")
@@ -124,6 +130,31 @@ public class CatalogController {
     public ResponseEntity<String> deleteCatalog(@PathVariable Long id){
         String result;
         result = catalogService.deleteCatalog(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    //카테고리 품목 생성
+    @PostMapping("/categories")
+    public ResponseEntity<ResponseCategory> createCategories(@RequestBody RequestCategory requestCategory){
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        CategoryDto categoryDto = mapper.map(requestCategory, CategoryDto.class);
+        categoryService.createCategories(categoryDto);
+
+        ResponseCategory responseCategory = mapper.map(categoryDto, ResponseCategory.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseCategory);
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<List<ResponseCategory>> getCategories(){
+        Iterable<CategoryEntity> cateList = categoryService.getAllCategorys();
+        List<ResponseCategory> result = new ArrayList<>();
+
+        cateList.forEach(v->{
+            result.add(new ModelMapper().map(v, ResponseCategory.class));
+        });
 
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }

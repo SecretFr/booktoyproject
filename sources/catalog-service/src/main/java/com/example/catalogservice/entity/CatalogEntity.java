@@ -4,7 +4,6 @@ import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
 import java.util.Date;
 

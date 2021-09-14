@@ -1,6 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function Delivery() {
+    const [userDatas, setUserDatas] = useState([])
+
+    const fetchItem = async () =>{
+        await axios.get(`/user-service/users/${sessionStorage.userId}`,{
+            headers: {
+                Authorization: `Bearer ${sessionStorage.token}`
+            }
+        })
+        .then(data=>{
+            setUserDatas(data.data)
+            console.log(data.data)
+        })
+        .catch(error => console.log(error))
+    }
+
+    useEffect(()=>{
+        fetchItem();
+    },[]);
+
     return (
         <div>
 
@@ -19,24 +39,24 @@ export default function Delivery() {
 
                                         <div className="tax-select">
                                             <label>* 받는 사람</label>
-                                            <input type="text" />
+                                            <input type="text" placeholder={userDatas.name}/>
                                         </div>
                                         <div className="tax-select">
-                                            <label>* 주소1</label>
-                                            <input type="text" />
+                                            <label>* Zipcode</label>
+                                            <input type="text" placeholder={userDatas.zipcode}/>
                                         </div>
                                         <div className="tax-select">
-                                            <label>* 주소2</label>
-                                            <input type="text" />
+                                            <label>* 주소</label>
+                                            <input type="text" placeholder={userDatas.address1}/>
                                         </div>
                                         <div className="tax-select">
-                                            <label> 주소3</label>
-                                            <input type="text" />
+                                            <label>* 상세주소</label>
+                                            <input type="text" placeholder={userDatas.address2}/>
                                         </div>
-                                        <div className="tax-select">
+                                        {/* <div className="tax-select">
                                             <label>* 우편번호</label>
                                             <input type="text" />
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

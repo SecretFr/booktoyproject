@@ -3,7 +3,9 @@ import React, { Component, useState } from 'react';
 import Logo from "../../elements/ui/Logo"
 import swal from 'sweetalert'
 import { TextField } from '@material-ui/core';
-
+import { Link, Route } from 'react-router-dom';
+import HeaderTop from "../../elements/ui/HeaderTop"
+// eslint-disable-next-line
 async function loginUser(credentials) {
     console.log(credentials);
     return await fetch(`user-service/login`, {
@@ -98,7 +100,11 @@ export default function Login() {
     }
 
     return(
+        
         <div>
+            {/* <header className="header-area clearfix">
+                <HeaderTop/>
+            </header> */}
         <div id="login">
 <br/>  
 <br/>       
@@ -129,12 +135,17 @@ export default function Login() {
                             <div class="form-group">
                                 {/* <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></input></span></label><br/> */}
                                 {/* <a href="/" class="text-info"> */}
-                                    <button type="submit" name="submit" className="btn btn-info btn-md" value="Submit">LOGIN</button>
+                                <button type="submit" name="submit" className="btn btn-info btn-md" value="Submit">LOGIN</button>
                                 {/* </a> */}
                             </div>
                             <div id="register-link" className="text-right">
                                 <a href="/signup" className="text-info">Sign up here</a>
                             </div>
+                            {/* <div id="register-link" className="text-right">
+                                <a href="/signup">
+                                    <button type="button" className="text-info">SIGN UP</button>
+                                </a>
+                            </div>  */}
                         </form>
                     </div>
                 </div>

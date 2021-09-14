@@ -28,4 +28,6 @@ public class RequestUser {
     @Size(min = 2, message = "Address detail not be less than one characters")
     private String address2;
 
+    private int admin;
+
 }

@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
+import axios from 'axios';
 
-export default function AddBuyAndCart({data, color, size}) {
-
+export default function AddBuyAndCart({data, productId}) {
+    
     let process = require('../../../../../myProcess.json');
 
     const [count, setCount] = useState(1);
@@ -51,64 +52,22 @@ export default function AddBuyAndCart({data, color, size}) {
 
     }
 
-    const handlePutWishList = () => {
+   // 장바구니에 담기
+   const handlePutWishList = (productId) => {
+        
+    axios.post(`/cart-service/carts/${sessionStorage.userId}`, {
+        productId: productId
+    })
+    .then(res=>{
+        alert("장바구니 담기 성공")
+        console.log(res)
+    })
+    .catch(res=>{
+        alert("장바구니 담기 실패")
+        console.log(res)
+    })
+}
 
-        fetch(`http://${process.IP}:${process.PORT}/wish`,{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                id: data.id,
-                name: data.name,
-                image: data.image,
-                price: data.price,
-                discount: data.discount
-            }),
-        }).
-        then(
-            alert("success")
-        )
-
-    }
-
-
-    const handlePutCartList = () => {
-
-        fetch(`http://${process.IP}:${process.PORT}/cart`,{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                id: data.id,
-                name: data.name,
-                image: data.image,
-                price: data.price,
-                discount: data.discount,
-                qty : count,
-                color: color,
-                size: size
-            }),
-        }).
-        then(
-            alert("success"),
-            fetch(`http://${process.IP}:${process.PORT}/sidemenu/5`,{
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    id: sideMenuCartDatas.id,
-                    name: sideMenuCartDatas.name,
-                    url: sideMenuCartDatas.url,
-                    count: sideMenuCartDatas.count+1
-                }),
-            })
-            
-        )
-
-    }
 
     
     return(
@@ -119,11 +78,12 @@ export default function AddBuyAndCart({data, color, size}) {
                 <button className="inc qtybutton" onClick={()=>handleCountAdd()}>+</button>
             </div>
             <div className="pro-details-cart btn-hover">
-                <button onClick={()=> handlePutCartList()}> Add To Cart </button>
+                <button onClick={()=> handlePutWishList(productId)}> Add To Cart </button>
             </div>
             
             <div className="pro-details-cart btn-hover ml-0"> 
-                <a href="//www.amazon.com" rel="noopener noreferrer" target="_blank">Buy Now</a>
+                {/* <button onClick={()=> handlePutWishList(productId)}>Buy Now</button> */}
+                <Link to={`/payment/${count}/${productId}/${sessionStorage.userId}`}>Buy Now</Link>
             </div>
             
             <div className="pro-details-wishlist">

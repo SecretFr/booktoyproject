@@ -18,6 +18,12 @@ import Payment from './components/pages/payment/Payment';
 import Finished from './components/pages/finished/Finished';
 import Test from './components/pages/Test/Test';
 import EditAccout from './components/pages/myaccount/EditAccount';
+import UserList from './components/pages/admin/Admin'
+import UserOrderList from './components/elements/widgets/product/orderTable/User'
+import List from './components/elements/widgets/product/adminProduct/List';
+import UpdateList from './components/elements/widgets/product/adminProduct/UpdateList'
+import UpdateProduct from './components/elements/widgets/product/adminProduct/UpdateProduct';
+import UserOrder from './components/elements/widgets/product/userOrderTable/UserOrder';
 
 import "./assets/css/mystyle.css";
 import "./assets/css/style.css";
@@ -35,9 +41,9 @@ function App() {
 
   const token = sessionStorage.getItem('token');
 
-  if(!token){
-      return <Login/>
-  }
+  // if(!token){
+  //     return <Home/>
+  // }
 
   return (
     <BrowserRouter>
@@ -49,6 +55,9 @@ function App() {
 
         <Route exact path="/signup"><SignUp/></Route>
         <Route exact path="/login"><Login/></Route>
+        <Route exact path="/users"><UserList/></Route>
+        <Route exact path="/user/order/:userId/:name"><UserOrderList/></Route>
+        <Route exact path="/user/order/:userId"><UserOrder/></Route>
 
         <Route exact path="/cart"><Cart/></Route>
         <Route exact path="/wishlist"><Wishlist/></Route>
@@ -60,7 +69,11 @@ function App() {
         <Route exact path="/myaccount"><MyAccount/></Route>
         <Route exact path="/myaccount/editaccount"><EditAccout/></Route>
 
-        <Route exact path="/payment"><Payment/></Route>
+        <Route exact path="/:url/1"><List/></Route>
+        <Route exact path="/:url/2"><UpdateList/></Route>
+        <Route exact path="/update/:productId"><UpdateProduct/></Route>
+
+        <Route exact path="/payment/:count/:productId/:userId"><Payment/></Route>
         <Route exact path="/finished"><Finished/></Route>
 
 

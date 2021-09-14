@@ -42,10 +42,15 @@ export default function Finished() {
                                     </div>
                                     <br />
 
-                                    <div className="d-flex justify-content-center">
-                                    <a href="/myaccount">
-                                        <button type="button" class="btn btn-info">마이페이지 이동</button>
-                                        </a></div>
+                                <div className="d-flex justify-content-center">
+                                    <a href="/">
+                                        <button type="button" class="btn btn-info">홈 이동</button>
+                                    </a>
+                                </div>
+                                <div className="d-flex justify-content-center">
+                                    <a href="/productlist">
+                                        <button type="button" class="btn btn-info">Category</button>
+                                    </a></div>
                                 </div>
 
                             </div>

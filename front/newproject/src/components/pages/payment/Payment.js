@@ -10,12 +10,12 @@ import Delivery from '../../elements/ui/Delivery';
 
 
 export default function Payment() {
-
+    
     return(
         <Fragment>
             <Header />
             <Bread productName="Payment" />
-            <Delivery />
+            {/* <Delivery /> */}
             <PaymentMethod />
             <Footer />
         </Fragment>

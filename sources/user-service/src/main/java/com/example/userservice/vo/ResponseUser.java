@@ -18,6 +18,7 @@ public class ResponseUser {
     private String address2;
 
     private int wallet;
+    private int admin;
 
     private Date modifiedAt;
 

@@ -9,9 +9,9 @@ import Login from '../login/Login';
 
 export default function Home() {
     const token = sessionStorage.getItem('token');
-    if(!token){
-        return <Login/>
-    }
+    // if(!token){
+    //     return <Home/>
+    // }
 
     return (
         <Fragment>

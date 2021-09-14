@@ -89,7 +89,7 @@ export default function NavComponent() {
                                                     {
                                                         list.map((item, index) => (
                                                             <li key={index}>
-                                                                <Link to={`${item.url}/${item.id}`}>
+                                                                <Link to={`/management/${item.url}/${item.id}`}>
                                                                     {item.title}
                                                                 </Link>
                                                             </li>

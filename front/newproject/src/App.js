@@ -69,8 +69,8 @@ function App() {
         <Route exact path="/myaccount"><MyAccount/></Route>
         <Route exact path="/myaccount/editaccount"><EditAccout/></Route>
 
-        <Route exact path="/:url/1"><List/></Route>
-        <Route exact path="/:url/2"><UpdateList/></Route>
+        <Route exact path="/management/:url/1"><List/></Route>
+        <Route exact path="/management/:url/2"><UpdateList/></Route>
         <Route exact path="/update/:productId"><UpdateProduct/></Route>
 
         <Route exact path="/payment/:count/:productId/:userId"><Payment/></Route>

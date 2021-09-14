@@ -67,13 +67,13 @@ export default function EnrollProduct(){
         //alert(usersDatas.length);
         //console.log(values);
         e.preventDefault();
-        fetch(`catalog-service/catalogs`,{
+        fetch(`/catalog-service/catalogs`,{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'API-Key': 'secret',
-                "Access-Control-Allow-Origin" : `http://localhost:8000/catalog-service/catalogs`,
-                "Access-Control-Allow-Credentials": true
+                // 'API-Key': 'secret',
+                // "Access-Control-Allow-Origin" : `http://localhost:8000/catalog-service/catalogs`,
+                // "Access-Control-Allow-Credentials": true
             },
             body: JSON.stringify({
                 cateNo: selected,
@@ -82,8 +82,8 @@ export default function EnrollProduct(){
                 unitPrice: values.unitPrice,
                 detail: values.detail
             }),
-        }).
-        then(
+        })
+        .then(
             alert("success"),
             history.push('/')
             //window.location.href = '/'

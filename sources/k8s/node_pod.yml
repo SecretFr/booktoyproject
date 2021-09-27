@@ -12,5 +12,3 @@ spec:
     image: linkclean/hello
     ports:
       - containerPort: 8000
-
-      

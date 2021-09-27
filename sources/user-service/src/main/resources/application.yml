@@ -23,7 +23,7 @@ spring:
     sampler:
       probability: 1.0
   datasource:
-    url: jdbc:mariadb://localhost:23306/bookdb
+    url: jdbc:mariadb://localhost:3306/bookdb
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     password: test1234

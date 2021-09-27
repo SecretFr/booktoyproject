@@ -4,10 +4,10 @@
 
 FROM mariadb:latest
 
-ENV MARIADB_ROOT_PASSWORD test1357
-ENV MARIADB_DATABASE mydb
+ENV MARIADB_ROOT_PASSWORD test1234
+ENV MARIADB_DATABASE bookdb
 
-COPY ./dbdata /var/lib/mysql
+COPY ./mysql /var/lib/mysql
 
 EXPOSE 3306
 

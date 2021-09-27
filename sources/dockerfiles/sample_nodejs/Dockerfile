@@ -14,6 +14,7 @@ COPY ./index.js ./index.js
 
 # RUN ["npm", "install"]
 RUN npm install
+RUN npm install react-scripts@4.0.3 -g
 
 # install curl
 # RUN ["apk", "no-cache", "add", "curl"]
